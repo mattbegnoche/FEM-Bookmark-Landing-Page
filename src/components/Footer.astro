@@ -1,0 +1,28 @@
+---
+import logoBookmark from '../assets/images/logo-bookmark.svg';
+import iconFacebook from '../assets/images/icon-facebook.svg';
+import iconTwitter from '../assets/images/icon-twitter.svg';
+---
+
+<footer class="site-footer">
+  <div class="footer-inner container">
+    <div class="footer-left">
+      <a href="#" aria-label="Bookmark home">
+        <img src={logoBookmark.src} class="footer-logo" alt="Bookmark" width="148" height="25" />
+      </a>
+      <nav aria-label="Footer navigation" class="footer-nav">
+        <a href="#features">Features</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+    <div class="footer-socials">
+      <a href="#" aria-label="Visit our Facebook page">
+        <img src={iconFacebook.src} alt="" width="24" height="24" />
+      </a>
+      <a href="#" aria-label="Visit our Twitter page">
+        <img src={iconTwitter.src} alt="" width="24" height="20" />
+      </a>
+    </div>
+  </div>
+</footer>

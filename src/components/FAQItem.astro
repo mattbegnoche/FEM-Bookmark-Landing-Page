@@ -1,0 +1,29 @@
+---
+import iconArrow from '../assets/images/icon-arrow.svg';
+
+interface Props {
+  question: string;
+  answer: string;
+  index: number;
+}
+
+const { question, answer, index } = Astro.props;
+---
+
+<div class="faq-item">
+  <h3>
+    <button
+      type="button"
+      class="faq-trigger"
+      aria-expanded="false"
+      aria-controls={`faq-answer-${index}`}
+      data-faq-trigger
+    >
+      <span>{question}</span>
+      <img src={iconArrow.src} alt="" width="18" height="12" />
+    </button>
+  </h3>
+  <div class="faq-answer" id={`faq-answer-${index}`} hidden>
+    <p>{answer}</p>
+  </div>
+</div>

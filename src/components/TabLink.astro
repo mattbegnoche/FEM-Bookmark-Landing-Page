@@ -1,0 +1,21 @@
+---
+interface Props {
+  id: string;
+  label: string;
+  isActive?: boolean;
+}
+
+const { id, label, isActive = false } = Astro.props;
+---
+
+<button
+  type="button"
+  class={`tab-trigger ${isActive ? 'is-active' : ''}`}
+  role="tab"
+  id={`tab-${id}`}
+  aria-selected={isActive ? 'true' : 'false'}
+  aria-controls={`panel-${id}`}
+  data-tab={id}
+>
+  {label}
+</button>

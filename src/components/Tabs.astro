@@ -1,0 +1,48 @@
+---
+import Button from './Button.astro';
+import TabLink from './TabLink.astro';
+
+interface FeatureTab {
+  id: string;
+  label: string;
+  heading: string;
+  copy: string;
+  image: string;
+}
+
+interface Props {
+  tabs: FeatureTab[];
+}
+
+const { tabs } = Astro.props;
+---
+
+<section class="features" aria-label="Feature highlights" data-tabs>
+  <div class="tabs container" role="tablist" aria-label="Feature tabs">
+    {tabs.map((tab, index) => <TabLink id={tab.id} label={tab.label} isActive={index === 0} />)}
+  </div>
+
+  <div class="tab-panels">
+    {
+      tabs.map((tab, index) => (
+        <article
+          class="tab-panel container"
+          id={`panel-${tab.id}`}
+          role="tabpanel"
+          aria-labelledby={`tab-${tab.id}`}
+          data-panel={tab.id}
+          hidden={index !== 0}
+        >
+          <div class="feature-media shape-left">
+            <img src={tab.image} alt="" width="536" height="346" />
+          </div>
+          <div class="feature-copy">
+            <h3>{tab.heading}</h3>
+            <p>{tab.copy}</p>
+            <Button href="#">More Info</Button>
+          </div>
+        </article>
+      ))
+    }
+  </div>
+</section>

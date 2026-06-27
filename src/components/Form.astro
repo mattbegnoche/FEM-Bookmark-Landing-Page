@@ -1,0 +1,27 @@
+---
+import Button from './Button.astro';
+import iconError from '../assets/images/icon-error.svg';
+---
+
+<section class="newsletter" id="contact" aria-labelledby="newsletter-title">
+  <div class="newsletter-inner container">
+    <p class="newsletter-kicker">35,000+ already joined</p>
+    <h2 id="newsletter-title">Stay up-to-date with what we're doing</h2>
+    <form class="newsletter-form" data-newsletter-form novalidate>
+      <div class="field-wrap" data-email-field-wrap>
+        <label class="visually-hidden" for="email">Email address</label>
+        <input
+          id="email"
+          type="email"
+          name="email"
+          placeholder="Enter your email address"
+          autocomplete="email"
+          aria-describedby="email-error"
+        />
+        <img class="error-icon" src={iconError.src} alt="" width="20" height="20" />
+        <p id="email-error" class="error-message">Whoops, make sure it's an email</p>
+      </div>
+      <Button type="submit" variant="danger">Contact Us</Button>
+    </form>
+  </div>
+</section>

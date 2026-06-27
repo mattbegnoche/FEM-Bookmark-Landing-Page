@@ -1,0 +1,141 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navigation from '../components/Navigation.astro';
+import Footer from '../components/Footer.astro';
+import Button from '../components/Button.astro';
+import BrowserCard from '../components/BrowserCard.astro';
+import FAQList from '../components/FAQList.astro';
+import Form from '../components/Form.astro';
+import Tabs from '../components/Tabs.astro';
+import heroIllustration from '../assets/images/illustration-hero.svg';
+import featureOne from '../assets/images/illustration-features-tab-1.svg';
+import featureTwo from '../assets/images/illustration-features-tab-2.svg';
+import featureThree from '../assets/images/illustration-features-tab-3.svg';
+import logoChrome from '../assets/images/logo-chrome.svg';
+import logoFirefox from '../assets/images/logo-firefox.svg';
+import logoOpera from '../assets/images/logo-opera.svg';
+
+const featureTabs = [
+	{
+		id: 'bookmarking',
+		label: 'Simple Bookmarking',
+		heading: 'Bookmark in one click',
+		copy:
+			'Organize your bookmarks however you like. Our simple drag-and-drop interface gives you complete control over how you manage your favorite sites.',
+		image: featureOne.src,
+	},
+	{
+		id: 'searching',
+		label: 'Speedy Searching',
+		heading: 'Intelligent search',
+		copy:
+			'Our powerful search feature will help you find saved sites in no time at all. No need to trawl through all of your bookmarks.',
+		image: featureTwo.src,
+	},
+	{
+		id: 'sharing',
+		label: 'Easy Sharing',
+		heading: 'Share your bookmarks',
+		copy:
+			'Easily share your bookmarks and collections with others. Create a shareable link that you can send at the click of a button.',
+		image: featureThree.src,
+	},
+];
+
+const extensions = [
+	{ name: 'Chrome', minVersion: 62, logo: logoChrome.src, offsetClass: '' },
+	{ name: 'Firefox', minVersion: 55, logo: logoFirefox.src, offsetClass: 'offset-md' },
+	{ name: 'Opera', minVersion: 46, logo: logoOpera.src, offsetClass: 'offset-lg' },
+];
+
+const faqs = [
+	{
+		question: 'What is Bookmark?',
+		answer:
+			'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tincidunt justo eget ultricies fringilla. Phasellus blandit ipsum quis quam ornare mattis.',
+	},
+	{
+		question: 'How can I request a new browser?',
+		answer:
+			'Vivamus luctus eros aliquet convallis ultricies. Mauris augue massa, ultricies non ligula. Suspendisse imperdiet. Vivamus luctus eros aliquet convallis ultricies. Mauris augue massa, ultricies non ligula. Suspendisse imperdie tVivamus luctus eros aliquet convallis ultricies. Mauris augue massa, ultricies non ligula. Suspendisse imperdiet.',
+	},
+	{
+		question: 'Is there a mobile app?',
+		answer:
+			'Sed consectetur quam id neque fermentum accumsan. Praesent luctus vestibulum dolor, ut condimentum urna vulputate eget. Cras in ligula quis est pharetra mattis sit amet pharetra purus. Sed sollicitudin ex et ultricies bibendum.',
+	},
+	{
+		question: 'What about other Chromium browsers?',
+		answer:
+			'Integer condimentum ipsum id imperdiet finibus. Vivamus in placerat mi, at euismod dui. Aliquam vitae neque eget nisl gravida pellentesque non ut velit.',
+	},
+];
+---
+
+<Layout title="Bookmark Landing Page">
+	<div class="page-shell">
+		<Navigation />
+
+		<main>
+			<section class="hero container" aria-labelledby="hero-title">
+				<div class="hero-copy">
+					<h1 id="hero-title">A Simple Bookmark Manager</h1>
+					<p>
+						A clean and simple interface to organize your favourite websites. Open a new
+						browser tab and see your sites load instantly. Try it for free.
+					</p>
+					<div class="hero-actions">
+						<Button href="#pricing">Get it on Chrome</Button>
+						<Button href="#pricing" variant="ghost">Get it on Firefox</Button>
+					</div>
+				</div>
+				<div class="hero-media shape-right">
+					<img
+						src={heroIllustration.src}
+						alt="A screenshot of the Bookmark product interface"
+						width="578"
+						height="385"
+					/>
+				</div>
+			</section>
+
+			<section class="feature-intro section-intro container" id="features" aria-labelledby="features-title">
+				<h2 id="features-title">Features</h2>
+				<p>
+					Our aim is to make it quick and easy for you to access your favourite websites.
+					Your bookmarks sync between your devices so you can access them on the go.
+				</p>
+			</section>
+
+			<Tabs tabs={featureTabs} />
+
+			<section class="section-intro container" id="pricing" aria-labelledby="download-title">
+				<h2 id="download-title">Download the extension</h2>
+				<p>
+					We've got more browsers in the pipeline. Please do let us know if you've got a
+					favourite you'd like us to prioritize.
+				</p>
+			</section>
+
+			<section class="extension-grid container" aria-label="Browser extension cards">
+				{extensions.map((extension) => <BrowserCard {...extension} />)}
+			</section>
+
+			<section class="section-intro container" aria-labelledby="faq-title">
+				<h2 id="faq-title">Frequently Asked Questions</h2>
+				<p>
+					Here are some of our FAQs. If you have any other questions you'd like answered
+					please feel free to email us.
+				</p>
+			</section>
+
+			<FAQList items={faqs} />
+		</main>
+
+		<Form />
+		<Footer />
+	</div>
+	<script>
+		import '../scripts/landing.ts';
+	</script>
+</Layout>

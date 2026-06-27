@@ -1,0 +1,19 @@
+---
+import Button from './Button.astro';
+
+interface Props {
+  name: string;
+  minVersion: number;
+  logo: string;
+  offsetClass?: string;
+}
+
+const { name, minVersion, logo, offsetClass = '' } = Astro.props;
+---
+
+<article class={`extension-card ${offsetClass}`.trim()}>
+  <img src={logo} alt="" width="102" height="100" />
+  <h3>Add to {name}</h3>
+  <p>Minimum version {minVersion}</p>
+  <Button href="#">Add &amp; Install Extension</Button>
+</article>
