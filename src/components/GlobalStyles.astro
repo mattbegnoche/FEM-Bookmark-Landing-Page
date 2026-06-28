@@ -1,3 +1,4 @@
+<style is:global>
 :root {
   --blue-600: hsl(231, 69%, 60%);
   --blue-950: hsl(229, 31%, 21%);
@@ -82,67 +83,6 @@ h3 {
   border: 0;
 }
 
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.75rem 1.45rem;
-  border-radius: 0.35rem;
-  border: 2px solid transparent;
-  font-size: 0.875rem;
-  font-weight: 500;
-  letter-spacing: 0.01em;
-  line-height: 1;
-  cursor: pointer;
-  transition:
-    background-color 0.2s ease,
-    color 0.2s ease,
-    border-color 0.2s ease,
-    box-shadow 0.2s ease;
-  white-space: nowrap;
-}
-
-.btn-primary {
-  background: var(--blue-600);
-  color: #fff;
-  box-shadow: 0 10px 14px hsl(231 69% 60% / 0.3);
-}
-
-.btn-primary:hover,
-.btn-primary:focus-visible {
-  background: #fff;
-  color: var(--blue-600);
-  border-color: var(--blue-600);
-  outline: 0;
-}
-
-.btn-ghost {
-  background: var(--grey-50);
-  color: var(--blue-950);
-  box-shadow: 0 10px 15px hsl(229 31% 21% / 0.12);
-}
-
-.btn-ghost:hover,
-.btn-ghost:focus-visible {
-  background: #fff;
-  border-color: var(--blue-950);
-  outline: 0;
-}
-
-.btn-danger {
-  background: var(--red-400);
-  color: #fff;
-  min-width: 125px;
-}
-
-.btn-danger:hover,
-.btn-danger:focus-visible {
-  background: #fff;
-  color: var(--red-400);
-  border-color: var(--red-400);
-  outline: 0;
-}
-
 .site-header {
   display: flex;
   align-items: center;
@@ -174,23 +114,7 @@ h3 {
   outline: 0;
 }
 
-.btn-login {
-  background: var(--red-400);
-  color: #fff;
-  text-transform: uppercase;
-  padding-inline: 2rem;
-  box-shadow: 0 8px 10px hsl(0 94% 66% / 0.3);
-  letter-spacing: 0.1em;
-  font-size: 0.8rem;
-}
 
-.btn-login:hover,
-.btn-login:focus-visible {
-  background: #fff;
-  color: var(--red-400);
-  border-color: var(--red-400);
-  outline: 0;
-}
 
 .menu-toggle,
 .menu-close {
@@ -263,31 +187,6 @@ h3 {
   gap: 2.5rem;
   margin-top: auto;
   padding-top: 2rem;
-}
-
-.hero {
-  display: grid;
-  gap: 3.1rem;
-  padding-top: 1.3rem;
-  padding-bottom: 8.5rem;
-}
-
-.hero-copy {
-  text-align: center;
-  display: grid;
-  gap: 1.45rem;
-  order: 2;
-}
-
-.hero-copy h1 {
-  font-size: clamp(1.88rem, 4vw, 3rem);
-}
-
-.hero-actions {
-  display: flex;
-  justify-content: center;
-  gap: 0.9rem;
-  flex-wrap: wrap;
 }
 
 .hero-media,
@@ -807,3 +706,4 @@ h3 {
     bottom: -4.55rem;
   }
 }
+</style>

@@ -1,0 +1,83 @@
+---
+import Button from "../../components/ui/Button.astro"
+import heroIllustration from "../../assets/images/illustration-hero.svg"
+---
+<section class="hero container" aria-labelledby="hero-title">
+				<div class="hero-copy">
+					<h1 id="hero-title">A Simple Bookmark Manager</h1>
+					<p>
+						A clean and simple interface to organize your favourite websites. Open a new
+						browser tab and see your sites load instantly. Try it for free.
+					</p>
+					<div class="hero-actions">
+						<Button href="#pricing">Get it on Chrome</Button>
+						<Button href="#pricing" variant="ghost">Get it on Firefox</Button>
+					</div>
+				</div>
+				<div class="hero-media shape-right">
+					<img
+						src={heroIllustration.src}
+						alt="A screenshot of the Bookmark product interface"
+						width="578"
+						height="385"
+					/>
+				</div>
+			</section>
+
+<style>
+.hero {
+  display: grid;
+  gap: 3.1rem;
+  padding-top: 1.3rem;
+  padding-bottom: 8.5rem;
+}
+
+.hero-copy {
+  text-align: center;
+  display: grid;
+  gap: 1.45rem;
+  order: 2;
+}
+
+.hero-copy h1 {
+  font-size: clamp(1.88rem, 4vw, 3rem);
+}
+
+.hero-actions {
+  display: flex;
+  justify-content: center;
+  gap: 0.9rem;
+  flex-wrap: wrap;
+}
+
+@media (min-width: 48em) {
+  .hero {
+    grid-template-columns: 1fr minmax(300px, 1.15fr);
+    align-items: center;
+    gap: 2.2rem;
+  }
+
+  .hero-copy {
+    text-align: left;
+  }
+
+  .hero-copy {
+    order: 1;
+    max-width: 540px;
+    padding-top: 0.3rem;
+  }
+
+  .hero-copy h1 {
+    font-size: clamp(2.25rem, 4.2vw, 3rem);
+  }
+
+  .hero-media {
+    order: 2;
+  }
+
+  .hero-actions {
+    justify-content: flex-start;
+  }
+
+}
+</style>

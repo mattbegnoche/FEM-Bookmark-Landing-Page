@@ -1,8 +1,8 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Navigation from '../components/Navigation.astro';
-import Footer from '../components/Footer.astro';
-import Button from '../components/Button.astro';
+import Navigation from '../components/global/Navigation.astro';
+import Footer from '../components/global/Footer.astro';
+import Button from '../components/ui/Button.astro';
 import BrowserCard from '../components/BrowserCard.astro';
 import FAQList from '../components/FAQList.astro';
 import Form from '../components/Form.astro';
@@ -14,6 +14,7 @@ import featureThree from '../assets/images/illustration-features-tab-3.svg';
 import logoChrome from '../assets/images/logo-chrome.svg';
 import logoFirefox from '../assets/images/logo-firefox.svg';
 import logoOpera from '../assets/images/logo-opera.svg';
+import HeroSection from '../components/sections/HeroSection.astro';
 
 const featureTabs = [
 	{
@@ -75,29 +76,8 @@ const faqs = [
 <Layout title="Bookmark Landing Page">
 	<div class="page-shell">
 		<Navigation />
-
 		<main>
-			<section class="hero container" aria-labelledby="hero-title">
-				<div class="hero-copy">
-					<h1 id="hero-title">A Simple Bookmark Manager</h1>
-					<p>
-						A clean and simple interface to organize your favourite websites. Open a new
-						browser tab and see your sites load instantly. Try it for free.
-					</p>
-					<div class="hero-actions">
-						<Button href="#pricing">Get it on Chrome</Button>
-						<Button href="#pricing" variant="ghost">Get it on Firefox</Button>
-					</div>
-				</div>
-				<div class="hero-media shape-right">
-					<img
-						src={heroIllustration.src}
-						alt="A screenshot of the Bookmark product interface"
-						width="578"
-						height="385"
-					/>
-				</div>
-			</section>
+			<HeroSection/>
 
 			<section class="feature-intro section-intro container" id="features" aria-labelledby="features-title">
 				<h2 id="features-title">Features</h2>
