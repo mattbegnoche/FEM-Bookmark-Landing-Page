@@ -1,0 +1,288 @@
+---
+import Button from '../ui/Button.astro';
+import TabLink from '../TabLink.astro';
+import featureOne from '../../assets/images/illustration-features-tab-1.svg';
+import featureTwo from '../../assets/images/illustration-features-tab-2.svg';
+import featureThree from '../../assets/images/illustration-features-tab-3.svg';
+
+const featureTabs = [
+  {
+    id: 'bookmarking',
+    label: 'Simple Bookmarking',
+    heading: 'Bookmark in one click',
+    copy:
+      'Organize your bookmarks however you like. Our simple drag-and-drop interface gives you complete control over how you manage your favorite sites.',
+    image: featureOne.src,
+  },
+  {
+    id: 'searching',
+    label: 'Speedy Searching',
+    heading: 'Intelligent search',
+    copy:
+      'Our powerful search feature will help you find saved sites in no time at all. No need to trawl through all of your bookmarks.',
+    image: featureTwo.src,
+  },
+  {
+    id: 'sharing',
+    label: 'Easy Sharing',
+    heading: 'Share your bookmarks',
+    copy:
+      'Easily share your bookmarks and collections with others. Create a shareable link that you can send at the click of a button.',
+    image: featureThree.src,
+  },
+];
+---
+
+<section
+  class="features-section"
+  id="features"
+  aria-labelledby="features-title"
+  aria-label="Feature highlights"
+  data-features-tabs
+>
+  <div class="feature-intro section-intro container">
+    <h2 id="features-title">Features</h2>
+    <p>
+      Our aim is to make it quick and easy for you to access your favourite websites.
+      Your bookmarks sync between your devices so you can access them on the go.
+    </p>
+  </div>
+
+  <div class="tabs container" role="tablist" aria-label="Feature tabs">
+    {featureTabs.map((tab, index) => <TabLink id={tab.id} label={tab.label} isActive={index === 0} />)}
+  </div>
+
+  <div class="tab-panels">
+    {
+      featureTabs.map((tab, index) => (
+        <article
+          class={`tab-panel container ${index !== 0 ? 'is-hidden' : ''}`}
+          id={`panel-${tab.id}`}
+          role="tabpanel"
+          aria-labelledby={`tab-${tab.id}`}
+          data-panel={tab.id}
+          hidden={index !== 0}
+        >
+          <div class="feature-media shape-left">
+            <img src={tab.image} alt="" width="536" height="346" />
+          </div>
+          <div class="feature-copy">
+            <h3>{tab.heading}</h3>
+            <p>{tab.copy}</p>
+            <Button href="#">More Info</Button>
+          </div>
+        </article>
+      ))
+    }
+  </div>
+</section>
+
+<script>
+  const tabsRoot = document.querySelector('[data-features-tabs]');
+  if (tabsRoot) {
+    const tabButtons = Array.from(
+      tabsRoot.querySelectorAll<HTMLButtonElement>('[role="tab"]')
+    );
+    const tabPanels = Array.from(
+      tabsRoot.querySelectorAll<HTMLElement>('[role="tabpanel"]')
+    );
+
+    const activateTab = (button: HTMLButtonElement) => {
+      const controlsId = button.getAttribute('aria-controls');
+      if (!controlsId) return;
+
+      tabButtons.forEach((tabButton) => {
+        const isCurrent = tabButton === button;
+        tabButton.classList.toggle('is-active', isCurrent);
+        tabButton.setAttribute('aria-selected', String(isCurrent));
+
+        const panelId = tabButton.getAttribute('aria-controls');
+        if (!panelId) return;
+
+        const panel = document.getElementById(panelId);
+        if (!panel) return;
+
+        panel.classList.toggle('is-hidden', !isCurrent);
+        panel.hidden = !isCurrent;
+      });
+    };
+
+    if (tabButtons.length && tabPanels.length) {
+      const initiallyActive =
+        tabButtons.find((button) => button.getAttribute('aria-selected') === 'true') ?? tabButtons[0];
+      activateTab(initiallyActive);
+    }
+
+    tabButtons.forEach((button) => {
+      button.addEventListener('click', () => activateTab(button));
+
+      button.addEventListener('keydown', (event: KeyboardEvent) => {
+        if (event.key !== 'ArrowRight' && event.key !== 'ArrowLeft') return;
+        event.preventDefault();
+
+        const currentIndex = tabButtons.indexOf(button);
+        const offset = event.key === 'ArrowRight' ? 1 : -1;
+        const nextIndex = (currentIndex + offset + tabButtons.length) % tabButtons.length;
+        const nextButton = tabButtons[nextIndex];
+        nextButton.focus();
+        activateTab(nextButton);
+      });
+    });
+  }
+</script>
+
+<style>
+.section-intro {
+  max-width: 560px;
+  text-align: center;
+  display: grid;
+  gap: 1.2rem;
+}
+
+.features-section {
+  padding-block: 1.5rem 6.5rem;
+}
+
+.section-intro h2 {
+  font-size: clamp(1.55rem, 3vw, 2rem);
+}
+
+.feature-intro {
+  margin-bottom: 2rem;
+}
+
+.tabs {
+  display: grid;
+  max-width: 730px;
+  margin-inline: auto;
+  border-top: 1px solid hsl(229 8% 58% / 0.3);
+  border-bottom: 1px solid hsl(229 8% 58% / 0.3);
+  margin-bottom: 4rem;
+}
+
+.tabs :global(.tab-trigger) {
+  background: transparent;
+  border: 0;
+  padding: 1.2rem 1rem;
+  font: inherit;
+  font-size: 1rem;
+  color: hsl(229 8% 45%);
+  border-bottom: 1px solid hsl(229 8% 58% / 0.3);
+  cursor: pointer;
+  position: relative;
+}
+
+.tabs :global(.tab-trigger:last-child) {
+  border-bottom: 0;
+}
+
+.tabs :global(.tab-trigger:hover),
+.tabs :global(.tab-trigger:focus-visible) {
+  color: var(--red-400);
+  outline: 0;
+}
+
+.tabs :global(.tab-trigger.is-active) {
+  color: var(--blue-950);
+}
+
+.tabs :global(.tab-trigger.is-active::after) {
+  content: '';
+  position: absolute;
+  left: 25%;
+  right: 25%;
+  bottom: -1px;
+  height: 4px;
+  background: var(--red-400);
+  border-radius: 999px;
+}
+
+.tab-panels {
+  padding-bottom: 0;
+}
+
+
+.tab-panel.is-hidden {
+  display: none;
+}
+
+.tab-panel {
+  display: grid;
+  gap: 4.7rem;
+  align-items: center;
+}
+
+.feature-media {
+  position: relative;
+  padding-bottom: 1rem;
+}
+
+.shape-left::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  background: var(--blue-600);
+  height: clamp(180px, 28vw, 260px);
+  border-radius: 120px;
+  width: min(88vw, 560px);
+  bottom: -1.5rem;
+  left: -3rem;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.feature-copy {
+  display: grid;
+  gap: 1.6rem;
+  text-align: center;
+}
+
+.feature-copy h3 {
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+}
+
+.feature-copy :global(.btn) {
+  justify-self: center;
+  padding-inline: 1.45rem;
+}
+
+@media (min-width: 48em) {
+  .features-section {
+    padding-block: 2rem 8rem;
+  }
+
+  .tabs {
+    grid-template-columns: repeat(3, 1fr);
+    border-top: 0;
+    max-width: 730px;
+  }
+
+  .tabs :global(.tab-trigger) {
+    border-bottom: 0;
+    font-size: 1rem;
+  }
+
+  .tabs :global(.tab-trigger:last-child) {
+    border-bottom: 1px solid hsl(229 8% 58% / 0.3);
+  }
+
+  .tab-panel {
+    grid-template-columns: minmax(280px, 1fr) minmax(280px, 1fr);
+    gap: clamp(3rem, 6vw, 7.4rem);
+  }
+
+  .feature-copy {
+    text-align: left;
+    justify-items: flex-start;
+  }
+
+  .feature-copy :global(.btn) {
+    justify-self: flex-start;
+  }
+
+  .shape-left::after {
+    left: -10.4rem;
+    bottom: -4.55rem;
+  }
+}
+</style>

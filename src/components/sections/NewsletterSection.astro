@@ -1,0 +1,169 @@
+---
+import Button from '../ui/Button.astro';
+import iconError from '../../assets/images/icon-error.svg';
+---
+
+<section class="newsletter" id="contact" aria-labelledby="newsletter-title">
+  <div class="newsletter-inner container">
+    <p class="newsletter-kicker">35,000+ already joined</p>
+    <h2 id="newsletter-title">Stay up-to-date with what we're doing</h2>
+    <form class="newsletter-form" data-newsletter-form novalidate>
+      <div class="field-wrap" data-email-field-wrap>
+        <label class="visually-hidden" for="email">Email address</label>
+        <input
+          id="email"
+          type="email"
+          name="email"
+          placeholder="Enter your email address"
+          autocomplete="email"
+          aria-describedby="email-error"
+        />
+        <img class="error-icon" src={iconError.src} alt="" width="20" height="20" />
+        <p id="email-error" class="error-message">Whoops, make sure it's an email</p>
+      </div>
+      <Button type="submit" variant="danger">Contact Us</Button>
+    </form>
+  </div>
+</section>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>('[data-newsletter-form]');
+  const emailField = form?.querySelector<HTMLInputElement>('#email');
+  const fieldWrap = form?.querySelector<HTMLElement>('[data-email-field-wrap]');
+
+  if (form && emailField && fieldWrap) {
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const email = emailField.value.trim();
+      const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+      if (!email || !isValid) {
+        fieldWrap.classList.add('is-error');
+        emailField.setAttribute('aria-invalid', 'true');
+        return;
+      }
+
+      fieldWrap.classList.remove('is-error');
+      emailField.removeAttribute('aria-invalid');
+      form.reset();
+    });
+
+    emailField.addEventListener('input', () => {
+      fieldWrap.classList.remove('is-error');
+      emailField.removeAttribute('aria-invalid');
+    });
+  }
+</script>
+
+<style>
+.newsletter {
+  background: var(--blue-600);
+  padding-block: 4rem 4.4rem;
+  color: #fff;
+}
+
+.newsletter-inner {
+  max-width: 460px;
+  text-align: center;
+  display: grid;
+  gap: 1.8rem;
+}
+
+.newsletter-kicker {
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 0.77rem;
+  letter-spacing: 0.35em;
+  font-weight: 400;
+}
+
+.newsletter h2 {
+  font-size: clamp(1.5rem, 3.4vw, 2rem);
+  line-height: 1.35;
+}
+
+.newsletter-form {
+  display: grid;
+  gap: 1rem;
+  align-items: start;
+}
+
+.field-wrap {
+  position: relative;
+  border: 2px solid transparent;
+  border-radius: 0.45rem;
+  background: #fff;
+  padding: 0;
+  min-height: 52px;
+  display: flex;
+  align-items: stretch;
+}
+
+.field-wrap input {
+  width: 100%;
+  border: 0;
+  font: inherit;
+  font-size: 0.92rem;
+  padding: 0.95rem 2.8rem 0.95rem 1.15rem;
+  border-radius: 0.3rem;
+  color: var(--blue-950);
+}
+
+.field-wrap input::placeholder {
+  color: hsl(229 8% 58% / 0.65);
+  font-size: 0.9rem;
+}
+
+.field-wrap input:focus-visible {
+  outline: 2px solid var(--blue-950);
+  outline-offset: 2px;
+}
+
+.error-icon {
+  position: absolute;
+  top: 0.95rem;
+  right: 1rem;
+  display: none;
+}
+
+.error-message {
+  margin: 0;
+  position: absolute;
+  left: -2px;
+  right: -2px;
+  top: calc(100% + 0px);
+  background: var(--red-400);
+  color: #fff;
+  font-size: 0.7rem;
+  font-style: italic;
+  text-align: left;
+  padding: 0.35rem 0.7rem;
+  border-bottom-left-radius: 0.35rem;
+  border-bottom-right-radius: 0.35rem;
+  display: none;
+}
+
+.field-wrap.is-error {
+  border-color: var(--red-400);
+  background: var(--red-400);
+  padding-bottom: 1.65rem;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.field-wrap.is-error .error-icon,
+.field-wrap.is-error .error-message {
+  display: block;
+}
+
+@media (min-width: 48em) {
+  .newsletter {
+    padding-block: 3.7rem 4.6rem;
+  }
+
+  .newsletter-form {
+    grid-template-columns: 1fr auto;
+    gap: 1rem;
+  }
+}
+</style>

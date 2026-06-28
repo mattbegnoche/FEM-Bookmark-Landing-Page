@@ -28,8 +28,8 @@ import heroIllustration from "../../assets/images/illustration-hero.svg"
 .hero {
   display: grid;
   gap: 3.1rem;
-  padding-top: 1.3rem;
-  padding-bottom: 8.5rem;
+  padding-top: 2.5rem;
+  padding-bottom: 4rem;
 }
 
 .hero-copy {
@@ -48,6 +48,26 @@ import heroIllustration from "../../assets/images/illustration-hero.svg"
   justify-content: center;
   gap: 0.9rem;
   flex-wrap: wrap;
+}
+
+.hero-media {
+  position: relative;
+  padding-bottom: 1rem;
+  order: 1;
+}
+
+.shape-right::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  background: var(--blue-600);
+  height: clamp(180px, 28vw, 260px);
+  width: min(81vw, 540px);
+  border-radius: 120px;
+  bottom: -0.7rem;
+  right: -3rem;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
 }
 
 @media (min-width: 48em) {
@@ -77,6 +97,11 @@ import heroIllustration from "../../assets/images/illustration-hero.svg"
 
   .hero-actions {
     justify-content: flex-start;
+  }
+
+  .shape-right::after {
+    right: -9rem;
+    bottom: -2.75rem;
   }
 
 }

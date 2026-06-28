@@ -26,3 +26,85 @@ import iconTwitter from '../../assets/images/icon-twitter.svg';
     </div>
   </div>
 </footer>
+
+<style is:global>
+.site-footer {
+  background: var(--blue-950);
+  padding-block: 2rem;
+}
+
+.footer-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 2.4rem;
+}
+
+.footer-left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.footer-logo {
+  filter: brightness(0) saturate(100%) invert(100%);
+}
+
+.footer-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 1.45rem;
+  text-transform: uppercase;
+  letter-spacing: 0.11em;
+  font-size: 0.82rem;
+  color: #fff;
+}
+
+.footer-nav a:hover,
+.footer-nav a:focus-visible {
+  color: var(--red-400);
+  outline: 0;
+}
+
+.footer-socials {
+  display: flex;
+  gap: 2.2rem;
+  align-items: center;
+}
+
+.footer-socials a:hover img,
+.footer-socials a:focus-visible img {
+  filter: brightness(0) saturate(100%) invert(49%) sepia(89%) saturate(1244%)
+    hue-rotate(322deg) hue-rotate(0deg);
+  outline: 0;
+}
+
+@media (min-width: 48em) {
+  .site-footer {
+    padding-block: 2.1rem;
+  }
+
+  .footer-inner,
+  .footer-left {
+    flex-direction: row;
+    text-align: left;
+  }
+
+  .footer-inner {
+    justify-content: space-between;
+    gap: 1.5rem;
+  }
+
+  .footer-left {
+    gap: 4rem;
+  }
+
+  .footer-nav {
+    flex-direction: row;
+    gap: 2.65rem;
+  }
+}
+</style>

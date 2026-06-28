@@ -1,0 +1,115 @@
+---
+import BrowserCard from '../BrowserCard.astro';
+import logoChrome from '../../assets/images/logo-chrome.svg';
+import logoFirefox from '../../assets/images/logo-firefox.svg';
+import logoOpera from '../../assets/images/logo-opera.svg';
+
+const extensions = [
+  { name: 'Chrome', minVersion: 62, logo: logoChrome.src, offsetClass: '' },
+  { name: 'Firefox', minVersion: 55, logo: logoFirefox.src, offsetClass: 'offset-md' },
+  { name: 'Opera', minVersion: 46, logo: logoOpera.src, offsetClass: 'offset-lg' },
+];
+---
+
+<section class="download-section" id="pricing" aria-labelledby="download-title">
+  <div class="section-intro container">
+    <h2 id="download-title">Download the extension</h2>
+    <p>
+      We've got more browsers in the pipeline. Please do let us know if you've got a
+      favourite you'd like us to prioritize.
+    </p>
+  </div>
+
+  <div class="extension-grid container" aria-label="Browser extension cards">
+    {extensions.map((extension) => <BrowserCard {...extension} />)}
+  </div>
+</section>
+
+<style>
+.download-section {
+  padding-block: 0 6.5rem;
+}
+
+.section-intro {
+  max-width: 560px;
+  text-align: center;
+  display: grid;
+  gap: 1.2rem;
+  margin-bottom: 2.2rem;
+}
+
+.section-intro h2 {
+  font-size: clamp(1.55rem, 3vw, 2rem);
+}
+
+.extension-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.2rem;
+  max-width: 940px;
+}
+
+.extension-grid :global(.extension-card) {
+  background: #fff;
+  border-radius: 0.9rem;
+  text-align: center;
+  padding: 3rem 1.35rem 1.6rem;
+  box-shadow: 0 11px 18px hsl(229 31% 21% / 0.12);
+  display: grid;
+  gap: 0.65rem;
+  justify-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.extension-grid :global(.extension-card::before) {
+  content: '';
+  position: absolute;
+  inset-inline: 0;
+  height: 4px;
+  bottom: 5.25rem;
+  background-image: radial-gradient(
+    circle,
+    hsl(229 8% 58% / 0.45) 1.5px,
+    transparent 1.5px
+  );
+  background-size: 10px 4px;
+  background-position: center;
+}
+
+.extension-grid :global(.extension-card h3) {
+  font-size: 1.26rem;
+  margin-top: 1.5rem;
+}
+
+.extension-grid :global(.extension-card p) {
+  font-size: 0.95rem;
+  margin-bottom: 4.4rem;
+}
+
+.extension-grid :global(.extension-card .btn) {
+  width: 100%;
+  max-width: 238px;
+  padding-inline: 1rem;
+  font-size: 0.88rem;
+}
+
+@media (min-width: 48em) {
+  .download-section {
+    padding-block-end: 8.5rem;
+  }
+
+  .extension-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 2.15rem;
+  }
+
+  .extension-grid :global(.offset-md) {
+    transform: translateY(2.4rem);
+  }
+
+  .extension-grid :global(.offset-lg) {
+    transform: translateY(4.8rem);
+  }
+}
+</style>

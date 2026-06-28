@@ -1,0 +1,153 @@
+---
+import FAQItem from '../FAQItem.astro';
+import Button from '../ui/Button.astro';
+
+const faqs = [
+  {
+    question: 'What is Bookmark?',
+    answer:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tincidunt justo eget ultricies fringilla. Phasellus blandit ipsum quis quam ornare mattis.',
+  },
+  {
+    question: 'How can I request a new browser?',
+    answer:
+      'Vivamus luctus eros aliquet convallis ultricies. Mauris augue massa, ultricies non ligula. Suspendisse imperdiet. Vivamus luctus eros aliquet convallis ultricies. Mauris augue massa, ultricies non ligula. Suspendisse imperdie tVivamus luctus eros aliquet convallis ultricies. Mauris augue massa, ultricies non ligula. Suspendisse imperdiet.',
+  },
+  {
+    question: 'Is there a mobile app?',
+    answer:
+      'Sed consectetur quam id neque fermentum accumsan. Praesent luctus vestibulum dolor, ut condimentum urna vulputate eget. Cras in ligula quis est pharetra mattis sit amet pharetra purus. Sed sollicitudin ex et ultricies bibendum.',
+  },
+  {
+    question: 'What about other Chromium browsers?',
+    answer:
+      'Integer condimentum ipsum id imperdiet finibus. Vivamus in placerat mi, at euismod dui. Aliquam vitae neque eget nisl gravida pellentesque non ut velit.',
+  },
+];
+---
+
+<section class="faq-section" aria-labelledby="faq-title" data-faq-list>
+  <div class="section-intro container">
+    <h2 id="faq-title">Frequently Asked Questions</h2>
+    <p>
+      Here are some of our FAQs. If you have any other questions you'd like answered
+      please feel free to email us.
+    </p>
+  </div>
+
+  <div class="faq container" aria-label="Frequently asked questions">
+    {faqs.map((item, index) => <FAQItem question={item.question} answer={item.answer} index={index} />)}
+    <Button href="#" class="faq-cta">More Info</Button>
+  </div>
+</section>
+
+<script>
+  const faqList = document.querySelector('[data-faq-list]');
+
+  if (faqList) {
+    const faqTriggers = faqList.querySelectorAll('[data-faq-trigger]');
+
+    faqTriggers.forEach((trigger) => {
+      trigger.addEventListener('click', () => {
+        const expanded = trigger.getAttribute('aria-expanded') === 'true';
+        const answerId = trigger.getAttribute('aria-controls');
+        if (!answerId) return;
+
+        const answer = document.getElementById(answerId);
+        if (!answer) return;
+
+        const nextState = !expanded;
+        trigger.setAttribute('aria-expanded', String(nextState));
+        trigger.classList.toggle('is-open', nextState);
+        answer.hidden = !nextState;
+      });
+    });
+  }
+</script>
+
+<style>
+.section-intro {
+  max-width: 560px;
+  text-align: center;
+  display: grid;
+  gap: 1.2rem;
+  margin-bottom: 2.2rem;
+}
+
+.faq-section {
+  padding-block: 0 6.5rem;
+}
+
+.section-intro h2 {
+  font-size: clamp(1.55rem, 3vw, 2rem);
+}
+
+.faq {
+  max-width: 545px;
+  text-align: center;
+}
+
+.faq :global(.faq-item) {
+  border-top: 1px solid hsl(229 8% 58% / 0.35);
+  text-align: left;
+}
+
+.faq :global(.faq-item:last-of-type) {
+  border-bottom: 1px solid hsl(229 8% 58% / 0.35);
+}
+
+.faq :global(.faq-trigger) {
+  width: 100%;
+  background: transparent;
+  border: 0;
+  padding: 1.25rem 0;
+  font: inherit;
+  font-size: 1rem;
+  text-align: left;
+  color: var(--blue-950);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  cursor: pointer;
+}
+
+.faq :global(.faq-trigger:hover),
+.faq :global(.faq-trigger:focus-visible) {
+  color: var(--red-400);
+  outline: 0;
+}
+
+.faq :global(.faq-trigger img) {
+  transition: transform 0.2s ease, filter 0.2s ease;
+  filter: hue-rotate(0deg);
+}
+
+.faq :global(.faq-trigger.is-open img) {
+  transform: rotate(180deg);
+  filter: brightness(0) saturate(100%) invert(49%) sepia(89%) saturate(1244%)
+    hue-rotate(322deg) hue-rotate(0deg);
+}
+
+.faq :global(.faq-answer) {
+  padding-bottom: 1.7rem;
+  padding-right: 2rem;
+}
+
+.faq :global(.faq-answer p) {
+  font-size: 1rem;
+  line-height: 1.9;
+  color: hsl(229 8% 45%);
+}
+
+.faq :global(.faq-cta) {
+  margin-top: 3rem;
+  display: inline-flex;
+}
+
+@media (min-width: 48em) {
+  .faq-section {
+    padding-block-end: 8.5rem;
+  }
+}
+</style>
