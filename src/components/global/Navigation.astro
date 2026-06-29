@@ -1,6 +1,7 @@
 ---
 import Button from '../ui/Button.astro';
 import logoBookmark from '../../assets/images/logo-bookmark.svg';
+import logoBookmarkDark from "../../assets/images/logo-bookmark-dark.svg"
 import iconHamburger from '../../assets/images/icon-hamburger.svg';
 import iconClose from '../../assets/images/icon-close.svg';
 import iconFacebook from '../../assets/images/icon-facebook.svg';
@@ -35,7 +36,7 @@ import iconTwitter from '../../assets/images/icon-twitter.svg';
 
 <div class="mobile-menu" id="mobile-menu" data-mobile-menu hidden>
   <div class="mobile-menu-head container">
-    <img src={logoBookmark.src} class="mobile-logo" alt="Bookmark" width="148" height="25" />
+    <img src={logoBookmarkDark.src} class="mobile-logo" alt="Bookmark" width="148" height="25" />
     <button class="menu-close" type="button" aria-label="Close menu" data-menu-close>
       <img src={iconClose.src} alt="" width="16" height="15" />
     </button>
@@ -163,10 +164,6 @@ if (document.readyState === "loading") {
   justify-content: space-between;
   align-items: center;
   padding-bottom: 2.3rem;
-}
-
-.mobile-logo {
-  filter: brightness(0) saturate(100%) invert(100%);
 }
 
 .mobile-nav {
