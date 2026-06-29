@@ -80,14 +80,12 @@ const featureTabs = [
 <script>
   const tabsRoot = document.querySelector('[data-features-tabs]');
   if (tabsRoot) {
-    const tabButtons = Array.from(
-      tabsRoot.querySelectorAll<HTMLButtonElement>('[role="tab"]')
+    const tabButtons = Array.from(tabsRoot.querySelectorAll('[role="tab"]')).filter(
+      (button) => button instanceof HTMLButtonElement
     );
-    const tabPanels = Array.from(
-      tabsRoot.querySelectorAll<HTMLElement>('[role="tabpanel"]')
-    );
+    const tabPanels = Array.from(tabsRoot.querySelectorAll('[role="tabpanel"]'));
 
-    const activateTab = (button: HTMLButtonElement) => {
+    const activateTab = (button) => {
       const controlsId = button.getAttribute('aria-controls');
       if (!controlsId) return;
 
@@ -116,7 +114,7 @@ const featureTabs = [
     tabButtons.forEach((button) => {
       button.addEventListener('click', () => activateTab(button));
 
-      button.addEventListener('keydown', (event: KeyboardEvent) => {
+      button.addEventListener('keydown', (event) => {
         if (event.key !== 'ArrowRight' && event.key !== 'ArrowLeft') return;
         event.preventDefault();
 

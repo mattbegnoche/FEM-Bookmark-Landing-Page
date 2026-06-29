@@ -59,45 +59,43 @@ import iconTwitter from '../../assets/images/icon-twitter.svg';
 
 <script>
   const initMobileMenu = () => {
-  const menuToggle =
-    document.querySelector<HTMLButtonElement>("[data-menu-toggle]");
-  const menuClose =
-    document.querySelector<HTMLButtonElement>("[data-menu-close]");
-  const mobileMenu = document.querySelector<HTMLElement>("[data-mobile-menu]");
-  const mobileMenuLinks = document.querySelectorAll<HTMLAnchorElement>(
-    "[data-mobile-menu-link]",
-  );
+    const menuToggle = document.querySelector('[data-menu-toggle]');
+    const menuClose = document.querySelector('[data-menu-close]');
+    const mobileMenu = document.querySelector('[data-mobile-menu]');
+    const mobileMenuLinks = document.querySelectorAll('[data-mobile-menu-link]');
 
-  if (!menuToggle || !menuClose || !mobileMenu) return;
+    if (!(menuToggle instanceof HTMLButtonElement)) return;
+    if (!(menuClose instanceof HTMLButtonElement)) return;
+    if (!(mobileMenu instanceof HTMLElement)) return;
 
-  const openMenu = () => {
-    mobileMenu.hidden = false;
-    menuToggle.setAttribute("aria-expanded", "true");
-    document.body.classList.add("menu-open");
+    const openMenu = () => {
+      mobileMenu.hidden = false;
+      menuToggle.setAttribute('aria-expanded', 'true');
+      document.body.classList.add('menu-open');
+    };
+
+    const closeMenu = () => {
+      mobileMenu.hidden = true;
+      menuToggle.setAttribute('aria-expanded', 'false');
+      document.body.classList.remove('menu-open');
+    };
+
+    menuToggle.addEventListener('click', openMenu);
+    menuClose.addEventListener('click', closeMenu);
+    mobileMenuLinks.forEach((link) => link.addEventListener('click', closeMenu));
   };
 
-  const closeMenu = () => {
-    mobileMenu.hidden = true;
-    menuToggle.setAttribute("aria-expanded", "false");
-    document.body.classList.remove("menu-open");
+  const initLandingPage = () => {
+    initMobileMenu();
   };
 
-  menuToggle.addEventListener("click", openMenu);
-  menuClose.addEventListener("click", closeMenu);
-  mobileMenuLinks.forEach((link) => link.addEventListener("click", closeMenu));
-};
-
-const initLandingPage = () => {
-  initMobileMenu();
-};
-
-if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", initLandingPage, {
-    once: true,
-  });
-} else {
-  initLandingPage();
-}
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initLandingPage, {
+      once: true,
+    });
+  } else {
+    initLandingPage();
+  }
 </script>
 
 <style is:global>

@@ -27,11 +27,15 @@ import iconError from '../../assets/images/icon-error.svg';
 </section>
 
 <script>
-  const form = document.querySelector<HTMLFormElement>('[data-newsletter-form]');
-  const emailField = form?.querySelector<HTMLInputElement>('#email');
-  const fieldWrap = form?.querySelector<HTMLElement>('[data-email-field-wrap]');
+  const form = document.querySelector('[data-newsletter-form]');
+  const emailField = form?.querySelector('#email');
+  const fieldWrap = form?.querySelector('[data-email-field-wrap]');
 
-  if (form && emailField && fieldWrap) {
+  if (
+    form instanceof HTMLFormElement &&
+    emailField instanceof HTMLInputElement &&
+    fieldWrap instanceof HTMLElement
+  ) {
     form.addEventListener('submit', (event) => {
       event.preventDefault();
       const email = emailField.value.trim();
